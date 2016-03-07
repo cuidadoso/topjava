@@ -26,9 +26,10 @@ public class MealReadServlet extends HttpServlet
     private UserMealService userMealService = new UserMealServiceImpl();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         LOG.debug("redirect to mealRead");
+        req.setCharacterEncoding("UTF-8");
         List<UserMeal> mealList = new ArrayList();
         mealList.add(userMealService.read(Long.valueOf(req.getParameter("id"))));
         List<UserMealWithExceed> list =  UserMealsUtil.getFilteredMealsWithExceeded(mealList, LocalTime.of(0, 0), LocalTime.of(23, 59), 2000);

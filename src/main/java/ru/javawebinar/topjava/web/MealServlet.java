@@ -30,6 +30,7 @@ public class MealServlet extends HttpServlet
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         LOG.debug("redirect to mealList");
+        req.setCharacterEncoding("UTF-8");
         List<UserMeal> mealList = userMealService.list();
         List<UserMealWithExceed> list =  UserMealsUtil.getFilteredMealsWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(22, 0), 2000);
         req.setAttribute("list", list);

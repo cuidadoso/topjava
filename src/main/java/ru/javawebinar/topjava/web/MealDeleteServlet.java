@@ -19,9 +19,10 @@ public class MealDeleteServlet extends HttpServlet
     private static final Logger LOG = LoggerFactory.getLogger(MealDeleteServlet.class);
     private UserMealService userMealService = new UserMealServiceImpl();
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         LOG.debug("redirect to mealDelete");
+        req.setCharacterEncoding("UTF-8");
         long id = Long.valueOf(req.getParameter("id"));
         userMealService.delete(id);
         resp.sendRedirect("meals");

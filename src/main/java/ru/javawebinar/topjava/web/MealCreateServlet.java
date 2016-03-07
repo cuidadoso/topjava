@@ -22,9 +22,10 @@ public class MealCreateServlet extends HttpServlet
     private UserMealService userMealService = new UserMealServiceImpl();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         LOG.debug("redirect to mealCreate");
+        req.setCharacterEncoding("UTF-8");
         String description = req.getParameter("description");
         int calories = Integer.valueOf(req.getParameter("calories"));
         LocalDateTime dateTime = LocalDateTime.parse(req.getParameter("dateTime"));

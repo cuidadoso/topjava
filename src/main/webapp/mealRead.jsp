@@ -7,10 +7,10 @@
 <body>
 <h2>Meal read</h2>
 
-<form action="update" method="get">
+<form action="update" method="post">
     <table>
         <tr>
-            <td align="left"><input type="text" name="dateTime" value="${meal.dateTime}"/></td>
+            <td align="left"><input type="datetime-local" name="dateTime" value="${meal.dateTime}"/></td>
             <td align="left"><input type="text" name="description" value="${meal.description}"/></td>
             <td align="left"><input type="text" name="calories" value="${meal.calories}"/></td>
         </tr>

@@ -22,9 +22,10 @@ public class MealUpdateServlet extends HttpServlet
     private UserMealService userMealService = new UserMealServiceImpl();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         LOG.debug("redirect to mealUpdate");
+        req.setCharacterEncoding("UTF-8");
         long id = Long.valueOf(req.getParameter("id"));
         String description = req.getParameter("description");
         int calories = Integer.valueOf(req.getParameter("calories"));
