@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
@@ -17,13 +18,14 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
+    @Qualifier("inMemoryUser")
     private UserRepository repository;
 
     public User save(User user) {
         return repository.save(user);
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws NotFoundException{
         ExceptionUtil.check(repository.delete(id), id);
     }
 
