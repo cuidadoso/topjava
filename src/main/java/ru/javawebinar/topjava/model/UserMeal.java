@@ -15,18 +15,18 @@ public class UserMeal extends BaseEntity
 
     private final int calories;
 
-    private final User user;
+    private final Integer userId;
 
-    public UserMeal(LocalDateTime dateTime, String description, int calories, User user) {
-        this(null, dateTime, description, calories, user);
+    public UserMeal(LocalDateTime dateTime, String description, int calories, int userId) {
+        this(null, dateTime, description, calories, userId);
     }
 
-    public UserMeal(Integer id, LocalDateTime dateTime, String description, int calories, User user) {
+    public UserMeal(Integer id, LocalDateTime dateTime, String description, int calories, int userId) {
         super(id);
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
-        this.user = user;
+        this.userId = userId;
     }
 
     public LocalDateTime getDateTime() {
@@ -47,7 +47,7 @@ public class UserMeal extends BaseEntity
 
     public boolean isUserBelong(int userId)
     {
-        return user.getId() == userId;
+        return this.userId == userId;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class UserMeal extends BaseEntity
                 ", dateTime=" + dateTime +
                 ", description='" + description + '\'' +
                 ", calories=" + calories +
-                ", user=" + user.getId() + ":" + user.getName() +
+                ", user=" + userId +
                 '}';
     }
 }

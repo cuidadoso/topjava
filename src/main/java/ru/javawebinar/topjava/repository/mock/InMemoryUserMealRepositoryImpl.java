@@ -7,6 +7,7 @@ import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -28,10 +29,10 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public UserMeal save(UserMeal userMeal) {
-        LOG.info("save " + userMeal);
         if (userMeal.isNew()) {
             userMeal.setId(counter.incrementAndGet());
         }
+        LOG.info("save " + userMeal);
         repository.put(userMeal.getId(), userMeal);
         return userMeal;
     }
@@ -60,10 +61,16 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
         repository.values()
                 .stream()
                 .filter(userMeal -> userMeal.isUserBelong(userId))
-                .forEach(userMeal -> sortedUserMeals.add(userMeal));
+                .forEach(sortedUserMeals::add);
         Collections.sort(sortedUserMeals,
                 (userMeal1, userMeal2) -> userMeal1.getDateTime().isBefore(userMeal2.getDateTime()) ? -1 : 1);
         return sortedUserMeals.isEmpty() ? null : sortedUserMeals;
+    }
+
+    @Override
+    public List<UserMeal> getAll(int userId, LocalDateTime startDate, LocalDateTime endDate)
+    {
+        return UserMealsUtil.getFilteredByDate(getAll(userId), startDate, endDate);
     }
 }
 

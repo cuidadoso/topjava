@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.repository;
 
 import ru.javawebinar.topjava.model.UserMeal;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,4 +21,7 @@ public interface UserMealRepository {
 
     // null if not found
     List<UserMeal> getAll(int userId);
+
+    // null if not found
+    List<UserMeal> getAll(int userId, LocalDateTime startDate, LocalDateTime endDate);
 }

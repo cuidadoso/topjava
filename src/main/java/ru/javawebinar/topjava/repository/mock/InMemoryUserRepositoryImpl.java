@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * @author Alejandro
  * 13.03.2016
  */
-@Repository("inMemoryUser")
+@Repository
 public class InMemoryUserRepositoryImpl implements UserRepository
 {
     private static final Logger LOG = LoggerFactory.getLogger(InMemoryUserRepositoryImpl.class);
@@ -32,11 +32,11 @@ public class InMemoryUserRepositoryImpl implements UserRepository
     @Override
     public User save(User user)
     {
-        LOG.info("save " + user);
         if(user.isNew())
         {
             user.setId(counter.incrementAndGet());
         }
+        LOG.info("save " + user);
         repository.put(user.getId(), user);
         return user;
     }

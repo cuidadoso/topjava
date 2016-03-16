@@ -76,7 +76,7 @@ public class SpringMain {
             System.out.println("--== userMealRestController.CREATE ==--");
             System.out.println(
                     userMealRestController.create(new UserMeal(LocalDateTime.now(), "Завтрак и Ужин", 1500,
-                            new User(null, "userName2", "email2", "password2", Role.ROLE_USER)))
+                            new User(null, "userName2", "email2", "password2", Role.ROLE_USER).getId()))
             );
 
             System.out.println("--== userMealRestController.GET(19) ==--");
@@ -84,7 +84,7 @@ public class SpringMain {
 
             System.out.println("--== userMealRestController.UPDATE(19) ==--");
                     userMealRestController.update(new UserMeal(LocalDateTime.now(), "Завтрак и Ужин + десерт", 2500,
-                            new User(null, "userName3", "email2", "password2", Role.ROLE_USER)), 19);
+                            new User(null, "userName3", "email2", "password2", Role.ROLE_USER).getId()), 19);
 
             System.out.println("--== userMealRestController.GET(19) ==--");
             System.out.println(userMealRestController.get(19));
