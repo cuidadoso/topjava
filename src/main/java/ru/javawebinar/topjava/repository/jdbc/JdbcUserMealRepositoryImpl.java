@@ -49,6 +49,10 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public UserMeal save(UserMeal userMeal, int userId) {
+        if(userId != LoggedUser.id())
+        {
+            return null;
+        }
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", userMeal.getId())
                 .addValue("userId", LoggedUser.id())
@@ -83,13 +87,21 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public List<UserMeal> getAll(int userId) {
+        if(userId != LoggedUser.id())
+        {
+            return null;
+        }
         return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? ORDER BY date_time DESC", USER_MEAL_ROW_MAPPER, userId);
     }
 
     @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
+        if(userId != LoggedUser.id())
+        {
+            return null;
+        }
         Timestamp start = Timestamp.valueOf(startDate);
         Timestamp end = Timestamp.valueOf(endDate);
-        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id = ? AND date_time > ? AND date_time < ? ORDER BY date_time", USER_MEAL_ROW_MAPPER, userId, start, end);
+        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id = ? AND date_time > ? AND date_time < ? ORDER BY date_time DESC", USER_MEAL_ROW_MAPPER, userId, start, end);
     }
 }

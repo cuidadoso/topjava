@@ -31,12 +31,12 @@ public class UserMealServiceImpl implements UserMealService {
 
     @Override
     public Collection<UserMeal> getBetweenDateTimes(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
-        return repository.getBetween(startDateTime, endDateTime, userId);
+        return ExceptionUtil.check(repository.getBetween(startDateTime, endDateTime, userId), userId);
     }
 
     @Override
     public Collection<UserMeal> getAll(int userId) {
-        return repository.getAll(userId);
+        return ExceptionUtil.check(repository.getAll(userId), userId);
     }
 
     @Override
