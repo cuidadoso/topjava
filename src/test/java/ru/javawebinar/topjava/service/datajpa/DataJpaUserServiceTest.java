@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.service.datajpa;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.test.context.ActiveProfiles;
 import ru.javawebinar.topjava.MealTestData;
@@ -18,6 +19,7 @@ public class DataJpaUserServiceTest extends AbstractCacheableUserServiceTest
         User user = service.getWithMeals(USER_ID);
         MATCHER.assertEquals(USER, user);
         MealTestData.MATCHER.assertCollectionEquals(MealTestData.USER_MEALS, user.getMeals());
+        Assert.assertEquals(USER.getRoles(), user.getRoles());
     }
 
     @Test(expected = NotFoundException.class)

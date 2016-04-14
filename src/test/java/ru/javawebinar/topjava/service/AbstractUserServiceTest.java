@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.service;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +52,9 @@ abstract public class AbstractUserServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGet() throws Exception {
-        User user = service.get(USER_ID);
-        MATCHER.assertEquals(USER, user);
+        User user = service.get(ADMIN_ID);
+        MATCHER.assertEquals(ADMIN, user);
+        Assert.assertEquals(ADMIN.getRoles(), user.getRoles());
     }
 
     @Test(expected = NotFoundException.class)
@@ -64,6 +66,7 @@ abstract public class AbstractUserServiceTest extends AbstractServiceTest {
     public void testGetByEmail() throws Exception {
         User user = service.getByEmail("user@yandex.ru");
         MATCHER.assertEquals(USER, user);
+        Assert.assertEquals(USER.getRoles(), user.getRoles());
     }
 
     @Test
@@ -79,5 +82,6 @@ abstract public class AbstractUserServiceTest extends AbstractServiceTest {
         updated.setCaloriesPerDay(330);
         service.update(updated.asUser());
         MATCHER.assertEquals(updated, service.get(USER_ID));
+        Assert.assertEquals(updated.getRoles(), service.get(USER_ID).getRoles());
     }
 }
