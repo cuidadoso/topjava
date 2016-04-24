@@ -41,8 +41,8 @@
                                        <c:if test="${user.enabled}">checked</c:if> id="${user.id}"/>
                             </td>
                             <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
-                            <td><a class="btn btn-xs btn-primary edit" id="${user.id}">Edit</a></td>
-                            <td><a class="btn btn-xs btn-danger delete" id="${user.id}">Delete</a></td>
+                            <td><a class="btn btn-xs btn-primary edit" id="${user.id}"><fmt:message key="common.edit"/></a></td>
+                            <td><a class="btn btn-xs btn-danger delete" id="${user.id}"><fmt:message key="common.delete"/></a></td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -89,7 +89,7 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary"><fmt:message key="common.save"/></button>
                         </div>
                     </div>
                 </form>
