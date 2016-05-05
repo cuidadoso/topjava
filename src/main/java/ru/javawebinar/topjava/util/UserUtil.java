@@ -2,6 +2,8 @@ package ru.javawebinar.topjava.util;
 
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.model.UserMeal;
+import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.to.UserTo;
 
 /**
@@ -23,5 +25,18 @@ public class UserUtil {
         user.setEmail(userTo.getEmail().toLowerCase());
         user.setPassword(userTo.getPassword());
         return user;
+    }
+
+    public static UserMeal createFromTo(MealTo newMeal) {
+        new UserMeal(null, newMeal.getDateTime(), newMeal.getDescription(), newMeal.getCalories());
+
+        return null;
+    }
+
+    public static UserMeal updateFromTo(UserMeal userMeal, MealTo mealTo) {
+        userMeal.setDateTime(mealTo.getDateTime());
+        userMeal.setDescription(mealTo.getDescription());
+        userMeal.setCalories(mealTo.getCalories());
+        return userMeal;
     }
 }

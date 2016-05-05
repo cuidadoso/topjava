@@ -2,9 +2,13 @@ package ru.javawebinar.topjava.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
+import ru.javawebinar.topjava.to.MealTo;
+import ru.javawebinar.topjava.util.UserUtil;
 import ru.javawebinar.topjava.util.exception.ExceptionUtil;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -42,6 +46,15 @@ public class UserMealServiceImpl implements UserMealService {
     @Override
     public UserMeal update(UserMeal meal, int userId) {
         return ExceptionUtil.check(repository.save(meal, userId), meal.getId());
+    }
+
+    @Transactional
+    @Override
+    public UserMeal update(MealTo mealTo, int userId) throws NotFoundException
+    {
+        UserMeal meal = get(mealTo.getId(), userId);
+        UserMeal updatedMeal = UserUtil.updateFromTo(meal, mealTo);
+        return ExceptionUtil.check(repository.save(updatedMeal, userId), updatedMeal.getId());
     }
 
     @Override
